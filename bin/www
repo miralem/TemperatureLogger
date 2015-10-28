@@ -12,16 +12,17 @@ var http = require('http');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort('8080');
+var port = normalizePort('8081');
 app.set('port', port);
 
-console.log("port set to" + port);
+console.log("port set to " + port);
 
 /**
  * Create HTTP server.
  */
 
 var server = http.createServer(app);
+console.log("server started")
 
 /**
  * Listen on provided port, on all network interfaces.
