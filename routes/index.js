@@ -10,7 +10,6 @@ var file = "./" + dbName;
 var exists = fs.existsSync(file);
 
 
-
 /* POST */
 router.post('/', function(req, res, next) {	
 	var db = new sqlite3.Database(dbName);
