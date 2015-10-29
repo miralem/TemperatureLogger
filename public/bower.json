@@ -1,0 +1,23 @@
+{
+  "name": "Temperature Logger",
+  "description": "Tempereture logger",
+  "main": "",
+  "moduleType": [],
+  "keywords": [
+    "esp8266",
+    "temperature",
+    "logger"
+  ],
+  "authors": [
+    "Miralem Halilovic"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
