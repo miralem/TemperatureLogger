@@ -41,8 +41,6 @@ router.get('/', function(req, res, next) {
 
     var where = '';
 
-
-
     if(req.query.date){
         where += "WHERE DATE(date) BETWEEN '" + req.query.date + "' AND '" + req.query.date + "'";
     }
