@@ -42,10 +42,10 @@ router.get('/', function(req, res, next) {
     var where = '';
 
     if(req.query.date){
-        where += "WHERE DATE(date) BETWEEN '" + req.query.date + "' AND '" + req.query.date + "'";
+        where += " WHERE DATE(date) BETWEEN '" + req.query.date + "' AND '" + req.query.date + "'";
     }
 
-    var sql = 'SELECT date, address, temperature FROM data ' + where + ' ORDER BY date DESC';
+    var sql = 'SELECT date, address, temperature FROM data' + where + ' ORDER BY date DESC';
     console.log(sql)
 
 	db.serialize(function(){
