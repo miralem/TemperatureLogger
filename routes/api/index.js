@@ -62,11 +62,8 @@ router.get('/', function(req, res, next) {
 	var db = new sqlite3.Database(dbName);
 	var data = [];
 
-    var where = '';
+    where = " WHERE DATE(date) BETWEEN '" + moment().format("YYYY-MM-DD") + "' AND '" + moment().format("YYYY-MM-DD") + "'";
 
-    if(req.query.date){
-        where += " WHERE DATE(date) BETWEEN '" + req.query.date + "' AND '" + req.query.date + "'";
-    }
 
     var sql = 'SELECT * FROM data' + where + ' ORDER BY date DESC GROUP BY address';
 
