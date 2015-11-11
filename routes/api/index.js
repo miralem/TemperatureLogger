@@ -19,15 +19,15 @@ router.post('/', function(req, res, next) {
 	db.serialize(function() {
 		if(!exists) {
 			db.run('CREATE TABLE data(date DATETIME NOT NULL, address VARCHAR(64) NOT NULL, temperature REAL NOT NULL);');
+		}else{
+		    var stmt = db.prepare('INSERT INTO data (date, address, temperature) VALUES (?, ?, ?)');
+
+            req.query.temps.forEach(function(val){
+                stmt.run([moment().format("YYYY-MM-DD HH:mm:ss"), val.id, val.temp]);
+            })
+
+            stmt.finalize();
 		}
-
-		var stmt = db.prepare('INSERT INTO data (date, address, temperature) VALUES (?, ?, ?)');
-
-		req.query.temps.forEach(function(val){
-			stmt.run([moment().format("YYYY-MM-DD HH:mm:ss"), val.id, val.temp]);
-		})
-
-		stmt.finalize();
 	});
 
 	db.close();
