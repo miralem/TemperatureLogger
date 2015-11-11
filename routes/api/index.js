@@ -35,28 +35,6 @@ router.post('/', function(req, res, next) {
 	res.json({});
 });
 
-router.get('/', function(req, res, next) {
-	var db = new sqlite3.Database(dbName);
-	var data = [];
-
-    var where = '';
-
-    if(req.query.date){
-        where += " WHERE DATE(date) BETWEEN '" + req.query.date + "' AND '" + req.query.date + "'";
-    }
-
-    var sql = 'SELECT date, address, temperature FROM data' + where + ' ORDER BY date DESC';
-    console.log(sql)
-
-	db.serialize(function(){
-		db.each(sql, function(err, row){
-			data.push(row);
-		}, function(){
-			db.close();
-			res.json(data);
-		});
-	})
-});
 
 router.get('/', function(req, res, next) {
 	var db = new sqlite3.Database(dbName);
