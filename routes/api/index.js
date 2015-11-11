@@ -23,6 +23,8 @@ router.post('/', function(req, res, next) {
 		}else{
 		    var stmt = db.prepare('INSERT INTO data (date, address, temperature) VALUES (?, ?, ?)');
 
+            console.log(req.query.temps);
+
             req.query.temps.forEach(function(val){
                 stmt.run([moment().format("YYYY-MM-DD HH:mm:ss"), val.id, val.temp]);
             })
