@@ -18,6 +18,7 @@ router.post('/', function(req, res, next) {
 
 	db.serialize(function() {
 		if(!exists) {
+		    console.log("Create table...")
 			db.run('CREATE TABLE data(date DATETIME NOT NULL, address VARCHAR(64) NOT NULL, temperature REAL NOT NULL);');
 		}else{
 		    var stmt = db.prepare('INSERT INTO data (date, address, temperature) VALUES (?, ?, ?)');
