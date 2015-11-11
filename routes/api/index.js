@@ -56,8 +56,28 @@ router.get('/', function(req, res, next) {
 			res.json(data);
 		});
 	})
+});
 
+router.get('/', function(req, res, next) {
+	var db = new sqlite3.Database(dbName);
+	var data = [];
 
+    var where = '';
+
+    if(req.query.date){
+        where += " WHERE DATE(date) BETWEEN '" + req.query.date + "' AND '" + req.query.date + "'";
+    }
+
+    var sql = 'SELECT * FROM data' + where + ' ORDER BY date DESC GROUP BY address';
+
+	db.serialize(function(){
+		db.each(sql, function(err, row){
+			data.push(row);
+		}, function(){
+			db.close();
+			res.json(data);
+		});
+	})
 });
 
 module.exports = router;
