@@ -1,2 +1,4 @@
-<canvas id="line" class="chart chart-line" chart-data="chart.data" chart-labels="chart.labels" chart-legend="true" chart-series="chart.series" chart-click="onClick"></canvas>
-----------------
+<div ng-repeat="(key, val) in sensor" class="text-center">
+    <div>{{val.address}} / {{val.date}}</div>
+    <h2>{{val.temp}} &#8451;</h2>
+</div>
