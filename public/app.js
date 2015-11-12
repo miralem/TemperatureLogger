@@ -32,7 +32,7 @@ angular.module('temperatureLoggerApp',  [
 
                     sensorDataHandler();
 
-                    setTimeout(function(){
+                    setInterval(function(){
                         sensorDataHandler();
                     }, 15000);
 
