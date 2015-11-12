@@ -3,35 +3,19 @@ var moment = require('moment');
 var router = express.Router();
 var sqlite3 = require('sqlite3').verbose();
 
-var dbName = 'data.db';
-
-var fs = require("fs");
-var file = "./" + dbName;
-var exists = fs.existsSync(file);
-
-
 /* POST */
 router.post('/', function(req, res, next) {
-	var db = new sqlite3.Database(dbName);
-	if(!req.query.temps)
-		return;
+	var db = new sqlite3.Database('DB.db');
 
 	db.serialize(function() {
-		if(!exists) {
-		    console.log("Create table...")
-			db.run('CREATE TABLE data(date DATETIME NOT NULL, address VARCHAR(64) NOT NULL, temperature REAL NOT NULL);');
-		}else{
-		    var stmt = db.prepare('INSERT INTO data (date, address, temperature) VALUES (?, ?, ?)');
-
-            console.log(req.query.temps);
+		var stmt = db.prepare('INSERT INTO data (date, address, temperature) VALUES (?, ?, ?)');
 
             req.query.temps.forEach(function(val){
                 stmt.run([moment().format("YYYY-MM-DD HH:mm:ss"), val.id, val.temp]);
             })
 
             stmt.finalize();
-		}
-	});
+		})
 
 	db.close();
 
@@ -46,7 +30,7 @@ router.get('/', function(req, res, next) {
     where = " WHERE DATE(date) BETWEEN '" + moment().format("YYYY-MM-DD") + "' AND '" + moment().format("YYYY-MM-DD") + "'";
 
 
-    var sql = 'SELECT * FROM data' + where + ' ORDER BY date DESC LIMIT 100';
+    var sql = 'SELECT * FROM data' + where + ' ORDER BY date DESC GROUP BY address';
 
 	db.serialize(function(){
 		db.each(sql, function(err, row){
