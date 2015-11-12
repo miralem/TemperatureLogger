@@ -18,11 +18,12 @@ angular.module('temperatureLoggerApp',  [
 
                 },
                 controller: function ($scope, $http, moment, dataHandler) {
-                    $scope.sensor = {}
+
 
                     var sensorDataHandler = function(){
                         dataHandler.get()
                             .success(function(data){
+                                $scope.sensor = {}
                                 angular.forEach(data, function(row){
                                     if(!$scope.sensor[row.address])
                                         $scope.sensor[row.address] = row;
