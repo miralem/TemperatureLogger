@@ -29,6 +29,8 @@ router.get('/', function(req, res, next) {
 	var data = [];
 
     where = " WHERE DATE(date) BETWEEN '" + moment().format("YYYY-MM-DD") + "' AND '" + moment().format("YYYY-MM-DD") + "'";
+    where = "";
+
 
     var sql = 'SELECT * FROM data' + where + ' ORDER BY date DESC LIMIT 100';
 	console.log("run " + sql)
