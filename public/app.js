@@ -22,17 +22,9 @@ angular.module('temperatureLoggerApp',  [
                         .success(function(data){
                             console.log(date);
                         })
-                   
-                    })
 
-
-
-
-
-
-
-                
-            })
+                    }
+                })
         })
 
     .factory('dataHandler', function($http, conf, moment){
