@@ -20,7 +20,7 @@ angular.module('temperatureLoggerApp',  [
                 controller: function ($scope, $http, moment, dataHandler) {
                     dataHandler.get()
                         .success(function(data){
-                            console.log(date);
+                            console.log(data);
                         })
 
                     }
