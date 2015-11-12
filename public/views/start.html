@@ -1,4 +1,4 @@
 <div ng-repeat="(key, val) in sensor" class="text-center">
-    <div>{{val.address}} / {{val.date}}</div>
+    <div>{{val.address}} / <span am-time-ago="val.date"></span></div>
     <h2>{{val.temperature}} &#8451;</h2>
 </div>
