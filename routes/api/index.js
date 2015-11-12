@@ -2,6 +2,7 @@ var express = require('express');
 var moment = require('moment');
 var router = express.Router();
 var sqlite3 = require('sqlite3').verbose();
+var dbName = 'DB.db';
 
 /* POST */
 router.post('/', function(req, res, next) {
