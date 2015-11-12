@@ -29,10 +29,10 @@ router.get('/', function(req, res, next) {
 	var data = [];
 
     where = " WHERE DATE(date) BETWEEN '" + moment().format("YYYY-MM-DD") + "' AND '" + moment().format("YYYY-MM-DD") + "'";
-
+	where = "";
 
     var sql = 'SELECT * FROM data' + where + ' ORDER BY date DESC GROUP BY address';
-
+	console.log("run " + sql)
 	db.serialize(function(){
 		db.each(sql, function(err, row){
 			data.push(row);
