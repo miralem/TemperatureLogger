@@ -20,18 +20,24 @@ angular.module('temperatureLoggerApp',  [
                 controller: function ($scope, $http, moment, dataHandler) {
                     $scope.sensor = {}
 
-                    dataHandler.get()
-                        .success(function(data){
-                            console.log(data);
-
-                            angular.forEach(data, function(row){
-                                if(!$scope.sensor[row.address])
-                                    $scope.sensor[row.address] = row;
+                    var sensorDataHandler = function(){
+                        dataHandler.get()
+                            .success(function(data){
+                                angular.forEach(data, function(row){
+                                    if(!$scope.sensor[row.address])
+                                        $scope.sensor[row.address] = row;
+                                })
                             })
-                        })
-
                     }
-                })
+
+                    sensorDataHandler();
+
+                    setTimeout(function(){
+                        sensorDataHandler();
+                    }, 15000);
+
+                }
+            })
         })
 
     .factory('dataHandler', function($http, conf, moment){
@@ -43,6 +49,6 @@ angular.module('temperatureLoggerApp',  [
     })
 
     .constant('conf', {
-        apiUrl: 'http://188.226.133.251:8081/api'
+        apiUrl: '//:8081/api'
         //apiUrl: 'http://localhost:8081/api'
     })
