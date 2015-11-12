@@ -49,6 +49,6 @@ angular.module('temperatureLoggerApp',  [
     })
 
     .constant('conf', {
-        apiUrl: '/:8081/api'
+        apiUrl: '/api'
         //apiUrl: 'http://localhost:8081/api'
     })
